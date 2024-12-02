@@ -35,24 +35,50 @@ document.querySelector(".btn-roll").addEventListener("click", function () {
     roundScore = roundScore + diceNumber;
     document.getElementById("current-" + activePlayer).textContent = roundScore;
   } else {
-    // toglogchiin eeljindee busan onoog 0 bolgo.
-    roundScore = 0;
-    document.getElementById("current-" + activePlayer).textContent = 0;
-    // 1 buusan tul nuguu toglogchiin eelj irne.
-    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-
-    // ulaan tseg shiljuuleh.
-    document.querySelector(".player-0-panel").classList.toggle("active");
-    document.querySelector(".player-1-panel").classList.toggle("active");
-
-    //shoog tur alga bolgoh
-
-    diceDom.style.display = "none";
-
-    // if (activePlayer === 0) {
-    // activePlayer = 1;
-    //} else {
-    // activePlayer = 0;
-    //}
+    switchToNextPlayer();
   }
+});
+
+// Hold towchnii event listener
+
+document.querySelector(".btn-hold").addEventListener("click", function () {
+  // ug toglogchiin eeljnii onoog golobal onoon deer n nemj ugnu.
+  scores[activePlayer] = scores[activePlayer] + roundScore;
+  // delgets deer onoog uurchlunu
+  document.getElementById("score-" + activePlayer).textContent =
+    scores[activePlayer];
+
+  // ug toglogch hojson eshiig shalgah (onoo n 100gaas ih)
+  if (scores[activePlayer] >= 100) {
+    // yalagch gesen text iig nerniihaan orond gargana
+    document.getElementById("name-" + activePlayer).textContent = "WINNER!!";
+    document
+      .querySelector(".player-" + activePlayer + "-panel")
+      .classList.add("winner");
+  } else {
+  }
+
+  // toglogchiin eeljiig solilno.
+  switchToNextPlayer();
+});
+// ene function n togloh eeljiig draagin toglogch ruu shiljuuldeg
+function switchToNextPlayer() {
+  // eeljiin onoog 0 bolgono
+  roundScore = 0;
+  document.getElementById("current-" + activePlayer).textContent = 0;
+  // 1 buusan tul nuguu toglogchiin eelj irne.
+  activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+
+  // ulaan tseg shiljuuleh.
+  document.querySelector(".player-0-panel").classList.toggle("active");
+  document.querySelector(".player-1-panel").classList.toggle("active");
+
+  //shoog tur alga bolgoh
+
+  diceDom.style.display = "none";
+}
+// shine togloom ehluuleh tovchnii event listner
+
+document.querySelector(".btn-new").addEventListener("click", function () {
+  alert("clicket");
 });
