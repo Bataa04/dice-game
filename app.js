@@ -14,7 +14,7 @@ iniGame();
 // togloomig shineer ehelhed beltgene
 function iniGame() {
   // togloom ehlellee gedeg tuluwt oruulna
-  isNewGame = false;
+  isNewGame = true;
   //toglogchiin eeljiig hadgalah huvisagch negduger togloch 0 , hoyrdugaar toglogch 1
   activePlayer = 0;
   // toglogchdiin tugluulsan onoog hadgalah huvisagch
@@ -49,7 +49,7 @@ function iniGame() {
 // shoog shideh event listener
 document.querySelector(".btn-roll").addEventListener("click", function () {
   // 1-6 dotroh sanamsargui neg too gargaj awna
-  if (isNewGame === true) {
+  if (isNewGame) {
     var diceNumber = Math.floor(Math.random() * 6) + 1;
 
     // shooni yurgiig wed deer gargaj irne
@@ -86,17 +86,16 @@ document.querySelector(".btn-hold").addEventListener("click", function () {
     // ug toglogch hojson eshiig shalgah (onoo n 100gaas ih)
     if (scores[activePlayer] >= 100) {
       // togloomig duussan tuluwt oruulna
-      isNewGame = true;
+      isNewGame = false;
       // yalagch gesen text iig nerniihaan orond gargana
       document.getElementById("name-" + activePlayer).textContent = "WINNER!!";
       document
         .querySelector(".player-" + activePlayer + "-panel")
         .classList.add("winner");
     } else {
+      // toglogchiin eeljiig solilno.
+      switchToNextPlayer();
     }
-
-    // toglogchiin eeljiig solilno.
-    switchToNextPlayer();
   } else {
     alert("Togloom duussan baina. New Game towchig darnuu");
   }
